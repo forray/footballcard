@@ -1,0 +1,388 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi, minimal-ui, target-densitydpi=medium-dpi" />
+
+<!-- Old Meta
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+-->
+
+<title>Football Card Game 2014</title>
+<script type="text/javascript" src="cordova.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.4.2.min.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="js/jquery-scrollto.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="js/jquery.nicescroll.min.js"></script>
+ <script type="text/javascript" charset="utf-8">
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+		navigator.splashscreen.hide();
+		StatusBar.hide();
+	}
+    </script>
+
+<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="css/flipcard.css" />
+<link rel="stylesheet" href="css/3dstyle.css" media="screen">
+
+
+</head>
+
+<body>
+<!-- Background -->
+<div id="background">
+    <img src="img/mainbg.png" class="stretch" id="backgroundImage" alt="" />
+</div>
+
+<div id="background2">
+    <img src="img/mainbg2.png" class="stretch" id="backgroundImage" alt="" />
+</div>
+
+<!-- Start page -->
+<div data-role="page" id="start" data-theme="b" >
+	<div class="ui-content">
+		<div style="text-align:center" id="logo" onclick="pageController('start','schedule');" ><img src="img/logo2.png" class="logo animated swing"" vspace="5"></div>
+		<div id="menu1" onclick="pageController('start','quickteams');" class="menuButton"><div class="menuButtonCenter">QUICK GAME</div></div>
+		<div id="menu2" onclick="pageController('start','teams');" class="menuButton"><div class="menuButtonCenter" style="color:#ffb800"> CUP 2014</div></div>
+       	<div id="menu3" onclick="pageController('start','settings');" class="menuButton"><div class="menuButtonCenter">SETTINGS</div></div>
+        <div id="menu4" class="menuButton" onclick="pageController('start','about');" ><div class="menuButtonCenter">ABOUT</div></div>
+       
+     
+        <audio id="introAudio" src="audio/intro.mp3" preload="auto"></audio>
+        <!-- <center><img src="img/grund.png" class="logo"></center>    -->  
+	</div>
+</div>
+
+<!-- Choose team page -->
+<div data-role="page" id="teams" data-theme="b" class="ui-page ui-page-theme-b">
+
+	<div data-role="header" class="ui-header ui-bar-inherit" role="banner">
+		<h1 class="ui-title" role="heading" aria-level="1">Choose your team</h1>
+	</div>
+
+	<div id="scrollerTeam"><div id="scrollerTeamList">
+    </div></div>
+  
+</div>
+
+<!-- Quick team page -->
+<div data-role="page" id="quickteams" data-theme="b" class="ui-page ui-page-theme-b">
+</div>
+
+<!-- Game Settings -->
+<div data-role="page" id="settings" data-theme="b" class="ui-page ui-page-theme-b">
+	<div data-role="header" class="ui-header ui-bar-inherit" role="banner">
+			<h1 class="ui-title" role="heading" aria-level="1">Game settings</h1>
+		</div>
+	<div role="main" class="blackbg70">
+    	<div class="settingsOverlay" >
+        <div class="aboutBG">
+        	<label class="settingsField">Game level</label>
+            <select value="Field 1" class="settings-level">
+                <option value="level1">Rookie</option>
+                <option value="level2">Amateur</option>
+                <option value="level3">Medium</option>
+                <option value="level4">Professional</option>
+                <option value="level5">God</option>
+            </select>
+       </div> 
+       <div class="aboutBG">
+        	<label class="settingsField">1 on 1 fight in one match</label>
+            <select class="settings-fightnmb">
+                <option value="fight5">1</option>
+                <option value="fight7">7</option>
+                <option value="fight11">11</option>
+            </select> 
+        </div> 
+       <div class="aboutBG">
+       		<a onclick="soundSettingsChange(this);"><div class="settingsField" id="soundSelectBTN" >
+        	<label class="settingsField">Sound ON</label>
+            <img id="settings-sound" class="settings-sound" class="settings-sound" src="img/checkBig.png" style="width:1.5em"></a></div>
+       </div> 
+       <div class="aboutBG">
+       		<a onclick="tutorialSettingsChange();"><div class="settingsField" id="soundSelectBTN" >
+        	<label class="settingsField">Tutorial texts ON</label>
+            <img id="settings-tutorial" class="settings-sound" src="img/checkBig.png" style="width:1.5em"></a></div>
+       </div> <br>
+            
+            
+       
+        </div>
+        
+		<a onclick="pageController('settings','start');" href="#" class="bottom_link"><div class="footerbg"><h3>BACK</h3></div></a>
+	</div>
+</div>
+
+<!-- About page -->
+<div data-role="page" id="about" data-theme="b" class="ui-page ui-page-theme-b ">
+	<div data-role="header" class="ui-header ui-bar-inherit" role="banner">
+			<h1 class="ui-title" role="heading" aria-level="1">About the game</h1>
+		</div>
+	<div id="aboutDIV" class="aboutDIV">
+    	<div class="about"><div class="aboutBIG"><br>Football Cards - Cup 2014 Edition</div>
+        This card game is based on the Football Cup 2014 teams and players. The user can choose a country and set up his team by choosing the players and go through 7 rounds to win the Cup in the end. Every player has three properties: attack, defense and speed, each one has different values. The higher value wins the 1 by 1 fights.</div><br>
+    
+    	<div class="about"><div class="aboutBIG">Game rules</div>
+        Before starting your next match, choose 11 players. You can choose only those players who don’t have to miss out matches because of getting cards before or because of sport injury. After you have chosen the players, the luckier one can decide that the thrown coin is going to be “heads” or “tails”.</div><br>
+        
+        <div class="about"><div class="aboutBIG">Playing against each other</div>
+		During the match 11 players playing against 11 players, fighting one by one. The winner is going to be the one who is stronger in more features. If both players have the same number of strong features, the winner is going to be decided according to the total points. If it is also equal, the winner is the one who started the game. The score can be 11-0, 6-7 either 0-11, it’s for sure that someone is going to be the winner, the match can’t be ended in a tie.</div><br>
+
+        <div class="about"><div class="aboutBIG">Injuries, Red card, yellow card</div>
+        During a match, it can happen that players getting injuries randomly, for recovery they have to miss out 1-4 games. In this case, you can’t choose the injured player at the beginning when you field the team. Injured players are missing out for a given time – it is signed on the player’s card. During the match penalty cards are given randomly. Those ones are going to be received after the one by one match. Getting a red card or collecting three yellow cards means the player has to miss out a match. </div><br>
+        
+        <div class="about"><div class="aboutBIG">Joker player</div>
+        After a certain time a Joker player can appear in the team, who has extraordinary values. By using this card it’s easy to win. These players just appear and after a couple of matches they disappear. During a tournament they can appear several times to help to the team.</div><br>
+
+        <div class="about"><div class="aboutBIG">Basic functions</div>
+        The current round is automatically saved by the system so you can go on with playing at the next signing in. The game has 5 different  levels: professional/specialist/medium/amateur/rookie. The level can be set off on the main site at “settings”.</div><br>
+		
+        <div class="about"><div class="aboutBIG">About me</div>
+		This game was created by tomsource.com</div><br><br><br>
+    </div>
+    <div>
+		<a onclick="pageController('about','start');" href="#" class="bottom_link"><div class="footerbg"><h3>BACK</h3></div></a>
+	</div>
+   
+</div>
+
+<!-- Group page -->
+<div data-role="page" id="group" data-theme="b" >
+	<div data-role="header" class="ui-header ui-bar-inherit" role="banner">
+		<h1 class="ui-title" role="heading" aria-level="1"></h1>
+	</div>
+	<div role="main" id="cupResult" class="ui-content"></div>
+    <a onclick="pageController('group','groupend');"><div class="autoselectBTN" id="autoselectBTN" >Other groups</div></a>
+    <a onclick="pageController('group','players');"  class="bottom_link"><div class="footerbg"><h3>Next match</h3></div></a>
+</div>
+
+<!-- Groups -->
+<div data-role="page" id="groupend" data-theme="b">
+    <div role="main" class="ui-content">
+        <div id="groupFinalResult" class="aboutDIV"></div>
+        <a onclick="pageController('groupend','group');"  class="bottom_link">
+        	<div class="footerbg"><h3>back</h3></div></a>	
+    </div>
+</div>
+
+<!-- Groups Final -->
+<div data-role="page" id="groupfinal" data-theme="b">
+    <div role="main" class="ui-content">
+        <div id="groupFinalMatches"></div>
+         <a onclick="pageController('groupfinal','schedule');"><div class="autoselectBTN" id="autoselectBTN" >Final Chart</div></a>
+        <a onclick="pageController('groupfinal','players');"  class="bottom_link">
+        	<div class="footerbg"><h3>Next Game</h3></div></a>	
+    </div>
+</div>
+
+<!-- Selectin players page -->
+<div data-role="page" id="players" data-theme="b" class="ui-page ui-page-theme-b">
+<div role="main" class="ui-content">
+		<div data-role="header" class="ui-header ui-bar-inherit" role="banner">
+			<h1 class="ui-title" role="heading" aria-level="1">Selected players</h1>
+		</div>
+		<div role="main" id="selectedPlayersList" class="selectedPlayersList">
+			
+		</div>
+        <!--<div class="swipe"></div>-->
+        <a onclick="noAutocheckPlayers();"><div class="autoselectBTN" id="autoselectBTN" >AUTOSELECT PLAYERS<img src="img/check.png" style="width:1em"></div></a>
+        <a class="bottom_link" onclick="checkPlayers();"><div class="footerbg" id="readyBTN"><h3></h3></div></a>
+    </div>
+</div>
+
+<!-- Coin overlay -->
+<div id="coinOverlay" class="coinOverlay">
+	<div role="main" class="ui-content">
+		<center><br><img src="img/coin1.png" style="width: 90%"><br><br>
+       <img src="img/coin2.png" style="width: 60%"><br> <br> 
+        <a id="coinLink1" href="#" onclick="selectCoin('head');"><img id="coin_head" src="img/heads.png" class="coinImg"></a><a href="#" id="coinLink2" onclick="selectCoin('tail');"><img class="coinImg" id="coin_tail" src="img/tails.png" border="5"></a></center>
+       <br><br><br>
+       
+       <div id="coinWinner"></div>
+        
+		
+	</div>
+</div>
+
+
+<!-- Game Overalay -->
+<div data-role="page" id="game" data-theme="b" class="gameOverlay">
+	
+	<div role="main" class="ui-content" style="bottom:6.5em">
+    	<div class="ui-header ui-bar-inherit" id="game1TeamHeader" role="banner" data-role="header">
+			<h1 class="ui-title" role="heading" id="game1TeamName" aria-level="1"></h1>
+		</div>
+
+    
+		<div class="oppPlace">
+            
+           	<div id="game1" data-inset="true">
+                <center>
+                <img src="img/cardBack.png" hspace="5" style="float:left;width:20%">
+                    <section class="container">
+                        <div class="  flipped" id="card">
+                          <figure class="front" id="team1Card"></figure>
+                          <figure class="back"><img src="img/cardBack.png" height="100%" width="100%"></figure>
+                        </div>
+                    </section>
+                <img src="img/cardBack.png" hspace="13" style="float:left;width:20%">
+                </center>
+            </div>
+		</div>
+        <div class="gameTeam2" id="gameTeam2"></div>
+        <!--<div class="game2header" id="game2header"><div id="game2TeamName"></div></div>-->
+       
+        <a class="bottom_link" onclick="fightBTN();"><div class="footerbg" id="fightBTN"><h3>FIGHT</h3></div></a>
+      
+	</div>
+</div>
+
+<!-- Quick result page -->
+<div data-role="page" id="quickresult" data-theme="b">
+	
+	<div role="main" class="ui-content" id="resultContent">
+    	<div id="quickResultPage"></div></div>
+          <a href="#" onclick="pageController('quickresult','start');"  class="bottom_link" id="quickResultBTN"><div class="footerbg"><h3>Back to main page</h3></div></a>
+
+</div>
+
+
+<!-- Result page -->
+<div data-role="page" id="results" data-theme="b">
+	
+	<div role="main" class="ui-content" id="resultContent">
+    	<div id="resultPage"></div></div>
+		<a href="#" class="bottom_link" id="resultBTN"><div class="footerbg"><h3>NEXT ROUND</h3></div></a>
+
+</div>
+
+<!-- Players horizontal scroll overlay -->
+<div class="game2" id="game2"></div>
+
+
+<!-- Menu overlay -->
+<!--<div id="menuOverlay" class="menuOverlay"><a href="page1"><img src="img/settings.png"></a></div> -->
+
+<!-- Fight overlay -->
+<div data-role="dialog" id="fightOverlay" class="fightOverlay">
+	<div id="fightBigDiv"><center>
+    	<div id="playersDiv">
+            <div id="fightPlayerImage1" class="fightPlayer1">
+            </div>
+            <div id="fightPlayerImage2" class="fightPlayer2">
+            </div>
+		</div>
+        <div id="numbersDiv">
+            <div id="numbersDivInside">
+                <div id="fight1rec"><div id="fight1LeftDiv"><div id="fight1Num1"></div></div><div class="fightName" id="fight1Name"></div><div id="fight1RightDiv"><div id="fight1Num2"></div></div></div>
+                 
+                 <div id="fight2rec"><div id="fight2LeftDiv"><div id="fight2Num1"></div></div><div class="fightName" id="fight2Name"></div><div id="fight2RightDiv"><div id="fight2Num2"></div></div></div>
+                 
+                 <div id="fight3rec"><div id="fight3LeftDiv"><div id="fight3Num1"></div></div><div class="fightName" id="fight3Name"></div><div id="fight3RightDiv"><div id="fight3Num2"></div></div></div>
+                 
+                 <div id="fight4rec"><div id="fight4LeftDiv"><div id="fight4Num1"></div></div><div class="fightName" id="fight4Name"></div><div id="fight4RightDiv"><div id="fight4Num2"></div></div></div>
+            
+            </div>
+            <div id="numbersDivGray">
+    			<div id="fight5rec"><div id="fight5LeftDiv"><div id="fight5Num1"></div></div><div id="fightSumName"></div><div id="fight5RightDiv"><div id="fight5Num2"></div></div></div>
+    		</div>
+    	</center></div>
+    </div>
+</div>
+
+<!-- Error overlay -->
+<div data-role="dialog" id="errorOverlay" class="errorOverlay"></div>
+
+<!-- Help text - Game -->
+<div data-role="dialog" id="helpOverlay" class="helpOverlay"><a href="" onclick="closeHelp()"><img src="img/tutorial.png" width="100%" height="100%"></a></div>
+
+<!-- Max 11 player overlay -->
+<div data-role="page" id="max11Overlay" class="max11Overlay"><center><br><br><img src="img/max11.png" class="logo70"></center></div>
+
+<!-- Minimum 11 player overlay -->
+<div data-role="page" id="min11Overlay" class="min11Overlay"><center><br><br><img src="img/11player.png" class="logo70"></center></div>
+
+<!-- Winner overlay -->
+<div data-role="page" id="winnerOverlay" class="winnerOverlay" onClick="pageController('results','start')"><br>
+	<center>
+    	<img src="img/winner1.png" class="logo70"><br>
+        <img src="img/winnercup.png" class="cup"><br>
+        <img src="img/winner2.png" class="logo70">
+    </center>  
+</div>
+
+<!-- Loser overlay 1 -->
+<div data-role="page" id="loserOverlay" class="loserOverlay" onClick="pageController('results','start')"><center><br>
+    	<img src="img/loser1.png" class="logo70"><br>
+        <img src="img/winnercup.png" class="cup"><br>
+        <img src="img/loser2.png" class="logo70">
+    </center>  
+</div>
+
+<!-- Loser overlay 2 -->
+<div data-role="page" id="loserOverlay2" class="loserOverlay" onClick="pageController('results','start')"><center><br>
+    	<img src="img/loser3.png" class="logo70"><br>
+        <img src="img/winnercup.png" class="cup"><br>
+        <img src="img/loser4.png" class="logo70">
+    </center>  
+</div>
+
+<div id="schedule">
+	<div class="scheduleIMG" id="scheduleDIV">
+    	<div class="scheduleTeam" id="match49AText"></div>
+        <div class="scheduleTeam" id="match49BText"></div>
+        <div class="scheduleTeam" id="match50AText"></div>
+        <div class="scheduleTeam" id="match50BText"></div>
+        <div class="scheduleTeam" id="match51AText"></div>
+        <div class="scheduleTeam" id="match51BText"></div>
+        <div class="scheduleTeam" id="match52AText"></div>
+        <div class="scheduleTeam" id="match52BText"></div>
+        <div class="scheduleTeam" id="match53AText"></div>
+        <div class="scheduleTeam" id="match53BText"></div>
+        <div class="scheduleTeam" id="match54AText"></div>
+        <div class="scheduleTeam" id="match54BText"></div>
+        <div class="scheduleTeam" id="match55AText"></div>
+        <div class="scheduleTeam" id="match55BText"></div>
+        <div class="scheduleTeam" id="match56AText"></div>
+        <div class="scheduleTeam" id="match56BText"></div>
+        <div class="scheduleTeam" id="match57AText"></div>
+        <div class="scheduleTeam" id="match57BText"></div>
+        <div class="scheduleTeam" id="match58AText"></div>
+        <div class="scheduleTeam" id="match58BText"></div>
+        <div class="scheduleTeam" id="match59AText"></div>
+        <div class="scheduleTeam" id="match59BText"></div>
+        <div class="scheduleTeam" id="match60AText"></div>
+        <div class="scheduleTeam" id="match60BText"></div>
+        <div class="scheduleTeam2" id="match61AText"></div>
+        <div class="scheduleTeam2" id="match61BText"></div>
+        <div class="scheduleTeam2" id="match62AText"></div>
+        <div class="scheduleTeam2" id="match62BText"></div>
+        <div class="scheduleTeam3" id="match63AText"></div>
+        <div class="scheduleTeam3" id="match63BText"></div>
+        <div class="scheduleTeam4" id="match64AText"></div>
+        <div class="scheduleTeam4" id="match64BText"></div>
+    </div>
+    
+    <a onclick="pageController('schedule','groupfinal');" href="#" class="bottom_link"><div class="footerbg"><h3>BACK</h3></div></a>
+</div>
+
+<script src="js/save.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/football.js"></script>
+<script src="js/group.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/flip-card.js"></script>
+
+
+
+</body>
+</html>

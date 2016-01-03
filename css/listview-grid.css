@@ -1,0 +1,121 @@
+/* A bit custom styling */
+.my-page .ui-listview li .ui-btn p {
+	color: #c0c0c0;
+}
+
+.my-page .ui-listview li .ui-btn .ui-li-aside {
+	color: #eee;
+}
+
+	.my-page .ui-content {
+		padding: .1625em; /* 9px */
+	}
+	.my-page .ui-listview li {
+		float: left;
+		max-width: 20%; /* 232p */
+		margin: .5625em 1.2%;
+		border-style:solid;
+		border-width:3px;
+		border-color:#000;
+		height: 10em;
+	}
+	.my-page .ui-listview li > .ui-btn {
+		-webkit-box-sizing: border-box; /* include padding and border in height so we can set it to 100% */
+		-moz-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		box-sizing: border-box;
+		height: 100%;
+	}
+	.my-page .ui-listview li.ui-li-has-thumb .ui-li-thumb {
+		height: auto; /* To keep aspect ratio. */
+		max-width: 100%;
+		max-height: 8em;
+	}
+	/* Make all list items and anchors inherit the border-radius from the UL. */
+	.my-page .ui-listview li,
+	.my-page .ui-listview li .ui-btn,
+	.my-page .ui-listview .ui-li-thumb {
+		-webkit-border-radius: inherit;
+		border-radius: inherit;
+	}
+	/* Hide the icon */
+	.my-page .ui-listview .ui-btn-icon-right:after {
+		display: none;
+	}
+	/* Make text wrap. */
+	.my-page .ui-listview h2,
+	.my-page .ui-listview p {
+		white-space: normal;
+		overflow: visible;
+		position: absolute;
+		left: 0;
+		right: 0;
+
+	}
+	/* Text position */
+	.my-page .ui-listview h2  {
+		font-size: 0.8em;
+		margin: 0;
+		padding: 0.25em 0.50em;
+		bottom: 8em;
+	}
+	.my-page .ui-listview p {
+		font-size: 0.75em;
+		margin: 0;
+		padding: 0 0.75em;
+		min-height: 30%;
+		bottom: 0;
+	}
+	/* Semi transparent background and different position if there is a thumb. The button has overflow hidden so we don't need to set border-radius. */
+	.ui-listview .ui-li-has-thumb h2,
+	.ui-listview .ui-li-has-thumb p {
+		background: #111;
+		background: rgba(0,0,0,.8);
+	}
+	.ui-listview .ui-li-has-thumb h2 {
+		bottom: 37%;
+	}
+	.ui-listview .ui-li-has-thumb p {
+		min-height: 35%;
+	}
+	/* ui-li-aside has class .ui-li-desc as well so we have to override some things. */
+	.my-page .ui-listview .ui-li-aside {
+		font-size: 1em;
+		padding: .125em .625em;
+		width: 5%;
+		min-height: 5%;
+		top: 0;
+		left: auto;
+		bottom: auto;
+		/* Custom styling. */
+		background: #990099;
+		background: rgba(153,0,153,.85);
+		-webkit-border-top-right-radius: center;
+		border-top-right-radius: center;
+		-webkit-border-bottom-left-radius: center;
+		border-bottom-left-radius: center;
+		-webkit-border-bottom-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+	/* If you want to add shadow, don't kill the focus style. */
+	.my-page .ui-listview li {
+		-moz-box-shadow: 0px 0px 9px #111;
+		-webkit-box-shadow: 0px 0px 9px #111;
+		box-shadow: 0px 0px 9px #111;
+	}
+	/* Images mask the hover bg color so we give desktop users feedback by applying the focus style on hover as well. */
+	.my-page .ui-listview li> .ui-btn:hover {
+		-moz-box-shadow: 0px 0px 12px #00af4b;
+		-webkit-box-shadow: 0px 0px 12px #00af4b;
+		box-shadow: 0px 0px 12px #00af4b;
+	}
+	
+	/* Animate focus and hover style, and resizing. */
+	.my-page .ui-listview li,
+	.my-page .ui-listview .ui-btn {
+		-webkit-transition: all 500ms ease;
+		-moz-transition: all 500ms ease;
+		-o-transition: all 500ms ease;
+		-ms-transition: all 500ms ease;
+		transition: all 500ms ease;
+	}
